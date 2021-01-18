@@ -54,7 +54,7 @@ const setVisible = element => document.querySelector(`#${element}`).style.displa
 
 const setInVisible = element => document.querySelector(`#${element}`).style.display = "none";
 
-const createBtn = (parentSelector, position, attrs, text)=> {
+const createBtn = (parentSelector, position, attrs, text) => {
     let btn = document.createElement('button');
     btn.textContent = text;
     setAttributes(btn, attrs);
@@ -86,7 +86,7 @@ const generateNavi = () => {
         listItem.appendChild(newLink);
         fragment.appendChild(listItem);
     }
-    document.getElementById('navbar__list'). appendChild(fragment)
+    document.getElementById('navbar__list').appendChild(fragment)
 }
 
 document.addEventListener('DOMContentLoaded', () => generateNavi());
@@ -103,7 +103,7 @@ const setSectionActive = () => {
     }
 
     if (sectionObj.stateChange) {
-        setTimeout( () => {
+        setTimeout(() => {
             document.querySelector(`#${sectionObj.getActiveBefore()}`).classList.remove('active-class');
             document.querySelector(`#${sectionObj.getActive()}`).classList.add("active-class");
             sectionObj.setStateChange(false);
@@ -123,15 +123,38 @@ document.querySelector('#navbar__list').addEventListener('click', evt => {
     }
 });
 
-// Scroll to top onclick to button
+// Click to btn handler
 
-createBtn('main', 'beforeend', {'onclick': 'scrollToTop()', 'class': 'btn', 'id': 'scrollUpBtn'}, 'scroll to top')
-const scrollToTop = () => document.documentElement.scrollIntoView();
+const btnClick = evt => {
+    if (evt.target.nodeName === 'BUTTON') {
+        if (evt.target.id === 'scrollUpBtn') {
+            document.documentElement.scrollIntoView();
+        } else {
+            let el = document.querySelector(`#${evt.target.attributes['data-btn'].textContent}`);
+            if (el.style.display === "block" || el.style.display === "") {
+                el.style.display = "none";
+            } else {
+                el.style.display = "block";
+            }
+            evt.preventDefault();
+        }
+    }
+}
 
-// Toggle section onclick to button
+document.querySelector(`main`).addEventListener('click', btnClick);
+
+// Create scroll to top button
+
+createBtn('main', 'beforeend', {'class': 'btn', 'id': 'scrollUpBtn'}, 'scroll to top');
+
+// Create toggle section button
 
 for (let section of sectionObj.sectionList) {
-    createBtn(`#${section.id} .landing__container`, 'afterbegin', {'onclick': 'scrollToTop()', 'data-btn': section.id ,'class': 'btn', 'id': 'toggleBtn'}, `toggle ${section.id}`)
+    createBtn(`#${section.id}`, 'beforebegin', {
+        'data-btn': section.id,
+        'class': 'btn',
+        'id': 'toggleBtn'
+    }, `toggle ${section.id}`);
 }
 
 // change visibility of navbar and scroll button
