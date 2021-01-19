@@ -206,3 +206,5 @@ document.addEventListener('scroll', e => {
     }, 1000);
 });
 
+/**
+ * End Main Functions
