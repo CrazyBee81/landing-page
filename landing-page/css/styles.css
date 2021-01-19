@@ -88,6 +88,12 @@ section {
     transition: ease 0.3s all;
 }
 
+.navbar__menu .active-class {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
@@ -100,7 +106,7 @@ section {
 /* Button Styles */
 
 .btn {
-    display:block;
+    display: block;
     border: none;
     outline: none;
     background-color: #fff;
@@ -235,6 +241,10 @@ section.active-class .landing__container::before {
 section.active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+.invisible-class {
+    display: none;
 }
 
 /* Section Active Styles Keyframe Animations */
