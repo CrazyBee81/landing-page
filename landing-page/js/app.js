@@ -18,6 +18,12 @@
  *
  */
 
+/**
+ * @description Represents the sections
+ * @param {boolean} a boolean value - indicates a stateChange of the Object
+ * @param {string} sectionName - the css selector of the currently active section
+ */
+
 const sectionObj = {
     sectionList: document.querySelectorAll('section'),
     activeSection: "section1",
@@ -26,9 +32,9 @@ const sectionObj = {
     setStateChange(value) {
         this.stateChange = value;
     },
-    setActive(name) {
+    setActive(sectionName) {
         this.activeBefore = this.activeSection;
-        this.activeSection = name;
+        this.activeSection = sectionName;
     },
     getActive() {
         return this.activeSection;
@@ -40,8 +46,15 @@ const sectionObj = {
 
 /**
  * End Global Variables
+
  * Start Helper Functions
  *
+ */
+
+/**
+ * @description Sets multiple attributes for an element
+ * @param {object} element - The element that shell get the new attributes
+ * @param {object} attributes - An object with the attribute as a key and its value
  */
 
 const setAttributes = (el, attrs) => {
@@ -50,10 +63,20 @@ const setAttributes = (el, attrs) => {
     }
 };
 
-const setVisible = element => document.querySelector(`#${element}`).style.display = "block";
+/**
+ * @description Helper functions to set elements visible or invisible
+ * @param {object} element - The element whos style display changes
+ * */
+const setVisible = element => document.querySelector(`#${element}`).classList.remove("invisible-class");
+const setInVisible = element => document.querySelector(`#${element}`).classList.add("invisible-class");
 
-const setInVisible = element => document.querySelector(`#${element}`).style.display = "none";
-
+/**
+ * @description Helper functions to create buttons
+ * @param {string} parentSelector - A string with the css selector
+ * @param {string} position - A string that holds information about the position of the button
+ * @param {object} attrs - An object with attributes as key and there values for the button
+ * @param {string} text - The buttons text
+ * */
 const createBtn = (parentSelector, position, attrs, text) => {
     let btn = document.createElement('button');
     btn.textContent = text;
@@ -62,17 +85,15 @@ const createBtn = (parentSelector, position, attrs, text) => {
 }
 
 /**
- * @param dasder
- */
-
-
-/**
  * End Helper Functions
+
  * Begin Main Functions
  *
  */
 
-// build the nav
+/**
+ * @description Creates a nav bar on DOMContentLoaded
+ * */
 
 const generateNavi = () => {
     let fragment = document.createDocumentFragment();
@@ -86,12 +107,14 @@ const generateNavi = () => {
         listItem.appendChild(newLink);
         fragment.appendChild(listItem);
     }
-    document.getElementById('navbar__list').appendChild(fragment)
+    document.getElementById('navbar__list').appendChild(fragment);
 }
 
 document.addEventListener('DOMContentLoaded', () => generateNavi());
 
-// Add class 'active' to section when near top of viewport
+/**
+ * @description Adds class 'active' on scroll
+ * */
 
 const setSectionActive = () => {
     for (let section of sectionObj.sectionList) {
@@ -105,7 +128,9 @@ const setSectionActive = () => {
     if (sectionObj.stateChange) {
         setTimeout(() => {
             document.querySelector(`#${sectionObj.getActiveBefore()}`).classList.remove('active-class');
+            document.querySelector(`a[data-link="#${sectionObj.getActiveBefore()}"]`).classList.remove('active-class');
             document.querySelector(`#${sectionObj.getActive()}`).classList.add("active-class");
+            document.querySelector(`a[data-link="#${sectionObj.getActive()}"]`).classList.add("active-class");
             sectionObj.setStateChange(false);
         }, 0);
     }
@@ -113,7 +138,9 @@ const setSectionActive = () => {
 
 document.addEventListener('scroll', setSectionActive);
 
-// Scroll to section on navi link click
+/**
+ * @description Adds a click event to the nav bar`s items
+ * */
 
 document.querySelector('#navbar__list').addEventListener('click', evt => {
     if (evt.target.nodeName === 'A') {
@@ -123,7 +150,9 @@ document.querySelector('#navbar__list').addEventListener('click', evt => {
     }
 });
 
-// Click to btn handler
+/**
+ * @description Click to button handler
+ * */
 
 const btnClick = evt => {
     if (evt.target.nodeName === 'BUTTON') {
@@ -131,11 +160,7 @@ const btnClick = evt => {
             document.documentElement.scrollIntoView();
         } else {
             let el = document.querySelector(`#${evt.target.attributes['data-btn'].textContent}`);
-            if (el.style.display === "block" || el.style.display === "") {
-                el.style.display = "none";
-            } else {
-                el.style.display = "block";
-            }
+            el.classList.toggle('invisible-class');
             evt.preventDefault();
         }
     }
@@ -143,11 +168,15 @@ const btnClick = evt => {
 
 document.querySelector(`main`).addEventListener('click', btnClick);
 
-// Create scroll to top button
+/**
+ * @description Creates a scroll to button
+ * */
 
 createBtn('main', 'beforeend', {'class': 'btn', 'id': 'scrollUpBtn'}, 'scroll to top');
 
-// Create toggle section button
+/**
+ * @description Creates a toggle section button
+ * */
 
 for (let section of sectionObj.sectionList) {
     createBtn(`#${section.id}`, 'beforebegin', {
@@ -157,17 +186,23 @@ for (let section of sectionObj.sectionList) {
     }, `toggle ${section.id}`);
 }
 
-// change visibility of navbar and scroll button
+/**
+ * @description Changes the visibility of the navbar and scrollUpButton on scroll
+ * */
 
 document.addEventListener('scroll', e => {
+    setVisible('navbar__list');
     setTimeout(() => {
         if (document.documentElement.scrollTop < 20) {
             setInVisible('scrollUpBtn');
-            setVisible('navbar__list');
         } else {
             setVisible('scrollUpBtn');
-            setInVisible('navbar__list');
         }
     }, 0);
+    setTimeout(() => {
+        if (document.documentElement.scrollTop > 20) {
+            setInVisible('navbar__list');
+        }
+    }, 1000);
 });
 
