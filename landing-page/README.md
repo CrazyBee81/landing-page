@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+* [Instructions](#instructions)
 * [Students assignment](#students assignment)
 * [Project description](#project description)
 * [Intended usage](#intended usage )
