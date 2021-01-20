@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-*[Students assignment](##Students assignment)
-*[Project description](##Project description)
-*[Intended usage](##Intended usage)
-*[How to get started](##How to get started)
+* [Students assignment](#students assignment)
+* [Project description](#project description)
+* [Intended usage](#intended usage )
+* [How to get started](#how to get started)
 
 ## Students assignment
 
