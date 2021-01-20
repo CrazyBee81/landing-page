@@ -145,7 +145,7 @@ document.addEventListener('scroll', setSectionActive);
 document.querySelector('#navbar__list').addEventListener('click', evt => {
     if (evt.target.nodeName === 'A') {
         let el = document.querySelector(evt.target.attributes['data-link'].textContent);
-        scrollTo(el.offsetLeft, el.offsetTop)
+        el.scrollIntoView();
         evt.preventDefault();
     }
 });
@@ -208,3 +208,4 @@ document.addEventListener('scroll', e => {
 
 /**
  * End Main Functions
+ * */
