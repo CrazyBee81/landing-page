@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-* [Assignment](#assignment)
-* [What this project can do](#What this project can do)
+* [Students assignment](#Students assignment)
+* [Project description](#Project description)
 * [Intended usage](#Intended usage)
 * [How to get started](#How to get started)
 
