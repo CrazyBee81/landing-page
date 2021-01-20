@@ -3,9 +3,9 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Students assignment](#students assignment)
-* [Project description](#project description)
-* [Intended usage](#intended usage )
+* [Students assignment](#students_assignment)
+* [Project description](#project_description)
+* [Intended usage](#intended_usage)
 * [How to get started](#how to get started)
 
 ## Students assignment
