@@ -2,11 +2,10 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
 * [Students assignment](#students_assignment)
 * [Project description](#project_description)
 * [Intended usage](#intended_usage)
-* [How to get started](#how to get started)
+* [How to get started](#how_to_get_started)
 
 ## Students assignment
 
