@@ -3,8 +3,8 @@
 ## Table of Contents
 
 * [Assignment](#assignment)
-* [What this project can do ](#What this project can do )
-* [Intended usage](#Intended usage )
+* [What this project can do](#What this project can do)
+* [Intended usage](#Intended usage)
 * [How to get started](#How to get started)
 
 ## Students assignment
